@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name="author" content="Alejandro Rojo">
+    <title>Translation highlighter</title>
+
+    <!-- styles -->
+
+    <!-- My styles -->
+    <link rel="stylesheet" type="text/css" href="../../style/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../style/graphicOutput.css" />
+
+    <!-- scripts -->
+    <script src="../../jsexternal/jquery-3.3.1.min.js"></script>
+
+    <!-- My scripts -->
+    <script src="../../js/common.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
+        body {
+            width: 90%;
+        }
+
+        .options {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="license">
+            <div>
+                <a href="https://creativecommons.org/licenses/by-nc/2.0/">
+                    <img class="invert" src="../../img/license_CC.png" />
+                    <img class="invert" src="../../img/license_Attribution.png" />
+                    <img class="invert" src="../../img/license_NonCommercial.png" />
+                    <!--
+                  <img class="invert" src="https://creativecommons.org/images/deed/cc_icon_white_x2.png" />
+                  <img class="invert" src="https://creativecommons.org/images/deed/attribution_icon_white_x2.png" />
+                  <img class="invert" src="https://creativecommons.org/images/deed/nc_white_x2.png" />
+                  -->
+                </a>
+                <span>2020-10 <a href="../../aboutme.html">Alejandro Rojo</a></span>
+            </div>
+            <div>
+                <a href="../../index.html" title="Title">Return</a> to main page
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <style>
+            .glossed {
+                width: auto;
+                display: inline-block;
+
+
+            }
+
+            .glossed .gloss {
+                display: block;
+
+                text-align: center;
+                font-size: 50%;
+                padding: 0 10px;
+
+                color: red;
+            }
+
+            .justified {
+                text-align: justify;
+                text-align-last: justify;
+            }
+
+            .glossed .content {
+                display: inline-block;
+
+                padding: 0 6px;
+
+            }
+
+            .glossed+.glossed {
+                /*
+                padding-right: 10px;
+                */
+            }
+        </style>
+        <section>
+            <!--
+            <div class="glossed">
+                <div class="gloss">Do</div>
+                <div class="content">It is</div>
+            </div>
+            <div class="glossed">
+                <div class="gloss">It is AAA BBB</div>
+                <div class="content">Do</div>
+            </div>
+            <div class="glossed">
+                <div class="gloss">Esto es demasiado texto ya</div>
+                <div class="content">Do</div>
+            </div>
+
+            <div class="glossed">
+                <div class="gloss">Do you remember the old days when </div>
+                <div class="content">When programming in several languages It is</div>
+            </div>
+
+            <div class="glossed">
+                <div class="gloss">Do you remember the old days when you were just starting</div>
+                <div class="content">When programming in several languages It </div>
+            </div>
+
+            <div class="glossed">
+                <div class="gloss">Do you remember the old days when youremember the old days when you remember the old
+                    days when you were just starting</div>
+                <div class="content">When programming in several languages It </div>
+            </div>
+-->
+
+        </section>
+
+
+        <div class="program_interface program_textarea">
+            <header class="description">
+                <h1>Translation high<span id="segment5" style="background-color: #f5d0e2;">lighter</span><a
+                        href="https://github.com/alerojorela/translation-highlighter"><img class="inline"
+                            src="../../img/pinned-octocat.svg"></a></h1>
+                <!--
+                <p>This app is a learning aid that <strong>highlights matching text segments</strong> between two
+                    different languages.</p>
+                -->
+
+            </header>
+
+
+            <div id="debug"></div>
+            <details open>
+                <summary>Edit</summary>
+
+                <div id="editor" class="content">
+
+                    <div id="input_area" class="input_area">
+                        <!--
+                <details class="userControls" open>
+                    <summary>User controls</summary>
+                    <div class="content">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>segment</td>
+                                    <td>2 x<img class="inline" title="doble click"
+                                            src="../../img/icons/mouse-svgrepo-com-left.png"></td>
+                                </tr>
+                                <tr>
+                                    <td>link</td>
+                                    <td><kbd>Ctrl</kbd><img class="inline" title="doble click"
+                                            src="../../img/icons/mouse-svgrepo-com-left.png"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                -->
+                        <div class="options">
+                            <input type="checkbox" id="cBoundary" checked onchange='update(this);'>
+                            <label for="cBoundary">Segment at word boundary</label>
+
+                            <input type="checkbox" id="cColors" checked onchange='update(this);'>
+                            <label for="cColors">Colors</label>
+                            <input type="checkbox" id="cForceColors" onchange='update(this);'>
+                            <label for="cForceColors">Color unassigned</label>
+
+                            <input type="checkbox" id="cUseGlosses" checked onchange='updateGloss(this);'>
+                            <label for="cUseGlosses">Show glosses</label>
+
+                            <input type="checkbox" id="cWrapText" checked onchange='wrapChanged(this);'>
+                            <label for="cWrapText">Wrap text</label>
+          
+                            <select id="sGroup" onchange="update(this);">
+                                <option value='0'>No grouping</option>
+                                <option value='1' selected>group paragraphs</option>
+                                <option value='2'>group verses</option>
+                            </select>
+                            <label for="sGroup">Correlate rows</label>
+
+                        </div>
+                        <div class='twocolumns'>
+                            <div>
+
+                                <div class="actions flexExtremes">
+                                    <div>
+                                        <input id="fileInput1" type="file" name="name" style="display: none;"
+                                            accept=".txt" />
+                                        <img class="button inline" title="open file"
+                                            src="../../img/icons/open-book-svgrepo-com.svg"
+                                            onclick="document.getElementById('fileInput1').click();">
+
+                                        <a id='saveFile1'>
+                                            <img class="button inline" title="save file"
+                                                src="../../img/icons/save-file-save-svgrepo-com.svg">
+                                        </a>
+
+                                        <img class="button inline" title="copy to clipboard"
+                                            src="../../img/icons/clipboard-svgrepo-com.svg"
+                                            onclick="copyClipboard(this);">
+                                        <!--
+                            <img class="button inline" src="../../img/icons/clipboard-paste-svgrepo-com.svg"
+                            onclick="pasteClipboard(this);">
+                            -->
+                                    </div>
+
+                                    <div>
+                                        <img class="button inline" title="print"
+                                            src="../../img/icons/print-button-svgrepo-com.svg" onclick="print(this);">
+
+                                        <img class="button inline" title="reorder"
+                                            src="../../img/icons/list-order-svgrepo-com.svg" onclick="sortArrays();">
+                                    </div>
+
+                                </div>
+
+                                <textarea id='input1' onkeyup="update();"
+                                    onresize="resizeTxt(this);">1/Use double click 2/to segment text
+3/CTRL+click 4/to link segments
+23/ALT+double click 24/to segment and link
+
+5/This app 6/is a 8/language 9/learning 10/aid. 11/It highlights 12/matching 13/text segments 15/between 16/two 17/different 16/languages.</textarea>
+                                <span id="selection1"></span>
+
+
+                            </div>
+                            <div>
+                                <div class="actions">
+                                    <input id="fileInput2" type="file" name="name" style="display: none;"
+                                        accept=".txt" />
+                                    <img class="button inline" title="open file"
+                                        src="../../img/icons/open-book-svgrepo-com.svg"
+                                        onclick="document.getElementById('fileInput2').click();">
+
+                                    <a id='saveFile2'>
+                                        <img class="button inline" title="save file"
+                                            src="../../img/icons/save-file-save-svgrepo-com.svg">
+                                    </a>
+
+                                    <img class="button inline" title="copy to clipboard"
+                                        src="../../img/icons/clipboard-svgrepo-com.svg" onclick="copyClipboard(this);">
+                                </div>
+
+                                <textarea id='input2' onkeyup="update();"
+                                    onresize="resizeTxt(this);">1/Haga doble click 2/para segmentar el texto,
+3/CTRL+click 4/para vincular segmentos
+23/ALT+doble click 24/para crear un segmento y vincularlo
+
+5/Esta aplicación 6/es una 10/herramienta 9/para el aprendizaje 8/de lenguas. 11/Marca 13/los segmentos de texto 12/correspondientes 15/entre 16/dos lenguas 17/diferentes.</textarea>
+                                <span id="selection2"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="actions">
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </details>
+
+            <div id="output_area" class="glossed">
+
+            </div>
+
+
+        </div>
+    </main>
+
+
+    <script src="translation-highlighter.js"></script>
+    <script>
+
+        // after document is loaded
+        window.onload = function () {
+            update();
+
+            $(window).bind('scroll', function () {
+                let obj = $('#input_area')
+                if ($(window).scrollTop() > obj.offset().top) {
+                    obj.addClass('fixed-menu');
+                } else {
+                    obj.removeClass('fixed-menu');
+                }
+            });
+        }
+
+        window.onbeforeunload = function (e) {
+            return 'Sure?';
+        };
+
+
+        function wrapChanged(obj) {
+
+            if ($('cWrapText').is(":checked")) {
+                $("#output_area").css("word-wrap", "break-word");
+                $("#output_area").css("white-space", "wrap");
+            } else {
+                $("#output_area").css("word-wrap", "unset");
+                $("#output_area").css("white-space", "nowrap");
+            }
+        }
+
+
+        function copyClipboard(obj) {
+            $(obj).parent().parent().find("textarea").select();
+            document.execCommand('copy');
+        }
+
+
+        function print() {
+            var myWindow = window.open('', '', 'width=900,height=800');
+
+            let innerHtml = $('#output_area').html();
+            myWindow.document.write(`<html>
+                <head>
+                    <title>Print</title>
+                    <link rel="stylesheet" type="text/css" href="../../style/common.css" />
+                    <link rel="stylesheet" type="text/css" href="../../style/graphicOutput.css" />
+                    <link rel="stylesheet" type="text/css" href="style.css">
+                </head>
+                <body>
+                    <div class="twocolumns" id="output_area">
+                        ${innerHtml}
+                    </div>
+                </body>
+                </html>`);
+
+            myWindow.document.close();
+            myWindow.focus();
+
+            myWindow.print();
+            // myWindow.close();
+
+            return;
+        }
+
+
+        document.getElementById("fileInput1").onchange = function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                data = data.replace("data:text/plain;base64,", "");
+                document.getElementById("input1").innerHTML = window.b64DecodeUnicode(data);
+                update();
+            };
+            reader.readAsDataURL(this.files[0]);
+        };
+        document.getElementById("fileInput2").onchange = function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                data = data.replace("data:text/plain;base64,", "");
+                document.getElementById("input2").innerHTML = b64DecodeUnicode(data);
+                update();
+            };
+            reader.readAsDataURL(this.files[0]);
+
+        };
+
+
+    </script>
+</body>
+
+</html>

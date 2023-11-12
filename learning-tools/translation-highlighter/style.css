@@ -1,0 +1,150 @@
+div.twocolumns>* {
+    display: inline-block;
+    min-width: unset;
+    width: 48%;
+
+    vertical-align: top;
+}
+
+
+
+
+
+#selection1,
+#selection2 {
+
+    display: block;
+    width: 100%;
+    min-height: 1.5em;
+    line-height: 2em;
+    max-height: 2em;
+
+    overflow: hidden;
+
+    font-size: smaller;
+    font-style: italic;
+    color: purple;
+    text-align: center;
+}
+
+#input_area textarea {
+    display: block;
+    min-height: 300px;
+
+    overflow: hidden;
+    /*
+    resize: none;
+    overflow: hidden;
+    */
+}
+
+
+#input_area .twocolumns:nth-child(1) textarea {
+    margin-right: 5px;
+}
+#input_area .twocolumns:nth-child(2) textarea {
+    margin-left: 5px;
+}
+
+
+/*
+#input_area .twocolumns>div:nth-child(1) .actions {
+*/
+#input_area .twocolumns .actions {
+    text-align: right;
+}
+
+img.button {
+    opacity: 60%;
+}
+
+img.button:hover {
+    opacity: 100%;
+}
+
+
+#editor .twocolumns {
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+#output_area {
+    display: table;
+    width: 100%;
+
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#output_area>div {
+    display: table-row;
+}
+
+#output_area>div>div {
+    display: table-cell;
+    width: 40%;
+
+}
+#output_area>div>div:nth-child(1){
+    padding-right: 7px;
+    text-align: right;
+}
+#output_area>div>div:nth-child(2){
+    padding-left: 7px;
+    text-align: left;
+}
+
+
+#output_area span {
+    line-height: 1em;
+}
+#output_area.glossed span {
+    line-height: 1.8em;
+}
+#output_area:not(.glossed) rt {
+    display: none;
+}
+
+
+span.source {
+    font-size: smaller;
+    color: #aaa;
+}
+
+
+
+
+
+/* This class is added on scroll */
+#input_area.fixed-menu textarea  {
+    position: fixed;
+    top: 0;
+    min-height: 200px;
+    height: 30vh;
+    resize: none;
+
+	z-index: 1;
+}
+.fixed-menu #input1 {
+    float: left;
+    left: 0;
+}
+
+
+.program_interface .input_area .flexExtremes {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+}
+
+details {
+    
+    background-color: rgb(247, 247, 247);
+}
+details summary {
+    padding: 15px 0; 
+    background-color: rgb(247, 247, 247);
+
+}

@@ -1,0 +1,390 @@
+/* TAXOGRID.HTML IS THE REFERENCE MODEL OF THIS TEMPLATE
+<!-- styles -->
+
+<!-- My styles -->
+
+<!-- scripts -->
+
+<!-- My scripts -->
+
+<div class="program_interface program_textarea">
+	<header class="description">
+		<h1>Taxonomy grid designer</h1>
+		<p>This app does...</p>
+	</header>
+
+	<div class="input_area">
+		<details class="notation">
+			<summary>Notation specification</summary>
+			<div class="content">
+				<p>Use...</p>
+			</div>
+		</details>
+
+		<textarea id=""></textarea>
+		<div id="debug"></div>
+
+		<div class="actions">
+		</div>
+		<div class="options">
+		</div>
+	</div>
+
+	<div class="output_area"></div>
+</div>
+
+
+program_interface program_textarea
+	description
+		h1 title
+		p
+	input_area
+		notation
+		textarea
+		debug
+		actions
+		options
+	output_area
+	
+*/
+
+
+
+/*
+Para documentos HTML con input, y con output gráficos
+*/
+/***************************
+****************************
+		LAYOUT
+****************************
+***************************/
+.flex {
+	width: 99%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+} 
+
+
+body {
+	width: 95%;
+	min-width: 80vw;
+	background: none;
+
+	margin: 0 auto; /* para centrarlo */
+	text-align: left;
+	font-family: 'Century Gothic', 'Arial Narrow';
+
+	color: var(--clr-text);
+	background-color: var(--clr-background);
+}
+@media (min-width: 600px) {
+	body {
+	    width: 50%;
+	}
+}
+textarea {
+	color: var(--clr-text);
+	background-color: var(--clr-background);
+}
+
+
+header {
+	/* text-align: right; */
+}
+
+main {
+	/* background-color: #fff; */
+	 /* color distinto del de la p�gina  */
+	padding: 15px;
+}
+
+footer {
+	text-align: center;
+}
+
+
+h1, h2 {
+	text-transform: uppercase;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Segoe Print', 'Trajan Pro', 'Calibri',  /* para Windows */
+				 'Chilanka', 'Purisa'; /* para Ubuntu */
+	color: var(--clr-highlight);
+}
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+	filter: brightness(150%);
+
+	/*
+	filter: saturate(200%);
+	*/
+}
+
+a {
+	color: var(--clr-a);
+	text-decoration: none;
+}
+
+
+/***************************
+****************************
+		HTML TEMPLATE
+****************************
+***************************/
+
+
+
+
+.program_interface>.description h1 {
+
+}
+.program_interface>.description p {
+	
+}
+.program_interface>.input_area {
+
+		margin: 15px 0;
+}
+
+
+
+.program_interface details {
+	width: 100%;
+	margin: 10px 0;
+	color: blueviolet;
+
+}
+.program_interface details {
+	width: 100%;
+	margin: 10px 0;
+	color: blueviolet;
+}
+
+.program_interface details>summary {
+	/*
+	border-top: 1px dotted blueviolet;
+	border-left: 1px dotted blueviolet;
+	border-right: 1px dotted blueviolet;
+	*/
+}
+.program_interface details>summary:hover {
+	/* reverse colors */
+	background-color: blueviolet;
+	color: #fff;
+	cursor: pointer;
+}
+
+
+.program_interface>.input_area details {
+	border: 1px dotted blueviolet;
+}
+.program_interface>.input_area details>*:not(summary) { /* summary niega esta configuración */
+	padding: 0 20px;
+}
+.program_interface>.input_area details summary {
+	border: 1px dotted blueviolet;
+	border-right: 3px solid blueviolet;
+	color: blueviolet;
+}
+
+
+
+textarea {
+	min-width: 100%;
+	resize: vertical;
+
+	border: 1px solid var(--clr-non-focused);
+	transition: all ease-out 1s;
+}
+
+textarea:not([disabled]):hover {
+	border: 1px solid var(--clr-highlight);
+}
+
+.program_interface>.input_area .userControls {
+	
+}
+
+
+.WarningArea {
+	display:none;
+	margin: 10px 30px;
+	padding: 10px 20px;
+	
+	border: 1px dotted gray;
+	border-left: 2px solid red;
+	color: red;
+}
+.program_interface>.input_area .debug, #debug {
+    margin: 0;
+    padding: 6px 10px;
+    display: none;
+
+    font-size: 70%;
+    background-color: blanchedalmond;
+    line-height: 0.5em;
+}
+/*
+warning or error followed by
+short explanation
+error debug details 
+*/
+.program_interface>.input_area .debug_error {
+    color: red;
+    font-weight: 700;
+}
+
+.program_interface>.input_area .debug_warning {
+    font-weight: 700;
+}
+
+.program_interface>.input_area .debug_explanation {
+    padding-left: 15px;
+
+    font-style: italic;
+    color: #555;
+}
+
+.program_interface>.input_area .debug_data {
+    padding-left: 15px;
+    float: right;
+
+    color: #555;
+}
+
+
+/* inline default */
+.program_interface>.input_area .actions,
+.program_interface>.input_area .options {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+
+
+.program_interface>.input_area input[type="button"] {
+	padding: 10px 20px;
+	margin-right: 2px;
+
+	border: none;
+	border-radius: 0px;
+	color: white;
+	background-color: var(--clr-highlight-mild);
+
+	cursor: pointer;
+}
+
+.program_interface>.input_area input[type="button"]:hover {
+	background-color: var(--clr-highlight);
+}
+.program_interface>.input_area input[type="number"] {
+	padding: 10px 0;
+
+	border: 1px solid #eee;
+	background: none;
+	box-shadow: none;
+	border-radius: 0px;
+}
+.program_interface>.input_area input[type="number"]:hover {
+	border: 1px solid var(--clr-highlight);
+}
+.program_interface>.input_area select {
+
+}
+.program_interface>.input_area a.button {
+	padding: 10px 20px;
+	margin-right: 2px;
+
+	border: none;
+	border-radius: 0px;
+	color: white;
+	background-color: var(--clr-highlight-mild);
+
+	cursor: pointer;
+}
+.program_interface>.input_area a.button:hover {
+	background-color: var(--clr-highlight);
+}
+
+
+.program_interface>.output_area {
+	
+}
+
+
+
+/***************************
+****************************
+		HIDDEN OBJECTS
+****************************
+***************************/  
+
+.hiddenBeforeProcessing {
+	display: none;
+}
+
+
+
+
+
+
+/***************************
+****************************
+		TABLES & LISTS
+****************************
+***************************/  
+  .minimalist th {
+	border-bottom: 3px solid;
+  }
+
+  td {
+	padding: 0 5px;
+  }
+
+  tbody tr:hover {
+	background-color: rgb(238, 238, 238);
+	}
+
+.table-of-contents {
+	background-color: #eee;
+}
+.table-of-contents li {
+	list-style-type: none;
+}
+
+
+
+
+
+/***************************
+****************************
+			SVG
+****************************
+***************************/
+
+text.selected {
+	font-family: Ubuntu;
+	fill: red;
+}
+
+text {
+	font-family: Isocteur, Courier New, sans-serif;
+}
+
+rect:hover {
+	fill: none;
+	/* filter: brightness(190%);
+	background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAEklEQVQYlWNgoBL4T7GCoW8FAGEXBfvNSmHvAAAAAElFTkSuQmCC
+	) repeat;
+	*/
+}
+
+#canvas {
+	height: 100px;
+}

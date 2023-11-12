@@ -1,0 +1,603 @@
+/**************************************************************
+ *                      	COMUNES
+ **************************************************************/
+/* 
+color: var(--clr-highlight); 
+var(--clr-non-focused);
+var(--clr-highlight);
+*/
+:root {
+	--clr-background: white;
+	--clr-text: black;
+
+	--clr-highlight: purple;
+	--clr-highlight-mild: rgb(131, 117, 131);
+	--clr-a: blue;
+
+	--clr-lines: purple;
+	--clr-non-focused: #becbd2;
+}
+
+ /*           <p contenteditable="true">This is an editable paragraph.</p>  */
+
+
+/* word mention, It is different from use
+Su correlato en el discurso oral son vocalizaciones como <span class="mention">ahá/mmm</span>, o expresiones del tipo <span class="mention">ya/sí/vale</span>.
+*/
+span.mention {
+	font-style: italic;
+}
+
+
+/* modal windows must appear in the forefront */
+.modal {
+	z-index: 1000;
+}
+
+
+img.inline {
+	width: 1em;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+	vertical-align: middle;
+
+}
+
+
+/***************************
+****************************
+		COLUMNAS
+****************************
+***************************/  
+
+.columns {
+
+	/*
+	margin: 20px auto;
+	width: 90%;
+	justify-content: space-around;
+	*/
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+
+	justify-content: space-between;
+	align-items: flex-start;
+  }
+ 
+  div.twocolumns>* {
+	display: inline-block;
+	width: 48%;
+  }
+  div.threecolumns>* {
+	display: inline-block;
+	width: 30%;
+  } 
+  div.fourcolumns>* {
+	display: inline-block;
+	width: 22%;
+  }
+  /*
+  .columns div.twocolumns {
+	width: 50%;
+  }
+
+  .columns div.threecolumns  {
+	width: 33%;
+  }
+
+  .columns div.fourcolumns  {
+	width: 25%;
+  }
+  */
+
+
+/******************************
+		figure img 
+*******************************/
+
+/* table adjusts figure caption to image width */
+figure {
+    display: table;
+    margin: 30px auto;
+}
+figure>* {
+	display: table-row;
+	text-align: center;
+}
+
+figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    padding: 5px 8px;
+}
+
+
+figure>figcaption {
+	font-style: italic;	
+	text-align: center;
+}
+
+figure img  {
+	max-width: 100%;
+}
+
+/* not in table */
+figure>img, figure>a>img {
+	transition: transform .3s; /* scale animation */
+}
+/* zoom in frame */
+figure>img:hover, figure>a>img:hover {   
+	padding:10px;
+
+
+	background-color: white;
+	border-radius: 3px;
+	border: 1px dotted #aaa; 
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	transform: scale(1.5);
+
+
+}
+
+/***************************
+****************************
+		TABLAS
+****************************
+***************************/  
+
+/* Una tabla que tiene 3 columnas, y las laterales están alineadas con la central verticalmente. */
+table.flankedtable td, table.flankedtableth {
+	padding: 0 5px;
+}
+
+table.flankedtable th:nth-child(1),table.flankedtable td:nth-child(1) {
+	text-align: right;
+}
+
+table.flankedtable td:nth-child(2),table.flankedtable td:nth-child(2) {
+	text-align: center;
+}
+
+table.flankedtable td:nth-child(3),table.flankedtable td:nth-child(3) {
+	text-align: left;
+}
+
+
+
+
+/* Una tabla con secciones de filas tbody */
+/* USADA POR vocabulario.html */
+
+.rowsections-table>thead>tr {
+	height: 50px;
+
+	border-bottom: 5px solid black;
+	background-color: rgb(235, 255, 253);
+}
+
+.rowsections-table td {
+	padding: 10px 5px;
+
+	vertical-align: top;
+}
+
+.rowsections-table td:nth-child(1) {
+	font-family: 'Courier New', Courier, monospace;
+}
+
+/* Primera celda de la sección */
+.rowsections-table>tbody>tr:nth-child(1)>td:nth-child(1) {
+
+	border-top: 2px solid purple;
+	/*
+	border-left: 2px solid purple;
+	*/
+	writing-mode: sideways-lr;
+}
+
+.rowsections-table>tbody:nth-child(odd) {
+	background-color: rgb(246, 255, 254);
+}
+
+/* banda vertical de sección */
+.rowsections-table>tbody:nth-child(odd) td:nth-child(1) {
+	background-color: rgb(235, 255, 253);
+}
+
+.rowsections-table>tbody:nth-child(even) {
+	background-color: rgb(248, 248, 255);
+}
+
+/* banda vertical de sección */
+.rowsections-table>tbody:nth-child(even) td:nth-child(1) {
+	background-color: rgb(234, 234, 255);
+}
+
+.rowsections-table tr:hover {
+	color: black;
+	background-color: rgb(238, 238, 238);
+	border-left: 5px solid #f8cff8;
+	border-right: 5px solid #f8cff8;
+}
+
+
+
+
+/***************************
+*	RATIO CONTAINER
+***************************/  
+/* http://www.mademyday.de/css-height-equals-width-with-pure-css.html */
+
+  .square {
+    position: relative;
+    width: 100%;
+    /* desired width */
+  }
+
+  .square:before {
+    content: "";
+	display: block;
+
+	/* relates height with width
+	/* 100% initial ratio of 1w:1h */
+	/* 200% initial ratio of 1w:2h */
+    padding-top: 100%;
+
+  }
+
+  .square div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+
+
+
+/***************************
+*		 LICENSE
+***************************/  
+.license {
+	height: 25px;
+
+	font-size: 75%;
+	
+	
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+
+}
+
+header .license {
+	border-bottom: 1px dotted var(--clr-lines);;
+}
+footer .license {
+	border-top: 1px dotted var(--clr-lines);;
+}
+
+.license a {
+	text-decoration: none;
+	font-style: italic;
+}
+.license img {
+	color: black;
+	height: 15px;
+}
+
+
+footer.attached {
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+
+	left: 0;
+	width: 100vw;
+}
+header.attached {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+
+	left: 0;
+	width: 100vw;
+}
+
+
+/***************************
+*		selections
+***************************/  
+aside.attachedleft {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+  }
+
+
+
+/***************************
+*			TABS
+***************************/  
+      /* You needA flex container can't be set a none display, wrap it with a div tab */
+
+      /* A flex container can't be set a none display, wrap it with a div tab */
+      .tabselection.option1>:not(:nth-child(1)) {
+        display: none;
+      }
+
+      .tabselection.option2>:not(:nth-child(2)) {
+        display: none;
+      }
+
+      .tabselection.option3>:not(:nth-child(3)) {
+        display: none;
+      }
+
+      /* .... */
+
+      .radiogroup input[type="radio"] {
+        display: none;
+      }
+
+      /* render shadows for any label associated with a non-checked radio input  */
+      .radiogroup input[type="radio"]:not(:checked)+label {
+        -webkit-box-shadow: inset 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: inset 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: inset 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      }
+
+      .radiogroup input[type="radio"]:not(:checked)+label:hover {
+        filter: brightness(1.25);
+        cursor: pointer;
+	  }
+
+
+
+
+/******************************
+*		NOTES, WARNINGS 
+******************************/
+.note {
+	margin: 5px 0;
+	padding: 10px 10px;
+
+	border-left: 3px solid #aaa;
+	font-size: 90%;
+}
+.important {
+	border-left: 3px solid red;
+	font-style: italic;
+	font-size: 110%;
+}
+.warning {
+	border-left: 3px solid orange;
+	font-style: italic;
+	font-size: 110%;
+}
+.error {
+	border-left: 3px solid red;
+	font-style: italic;
+	font-size: 110%;
+}
+
+.source {
+    border-left: 3px solid #aaa;
+    font-size: 90%;
+}
+figcaption .source {
+	margin-left: 10px;
+	padding-left: 5px;
+    border-left: 3px solid #aaa;
+	color: #666;
+    font-size: 90%;
+}
+
+/******************************
+*			TOOLTIP 
+******************************/
+/*
+HTML
+	<div id="word_tooltip" class="tooltip"></div>
+JQUERY DYNAMIC
+	// Define the div for the tooltip
+	var tooltip_obj = $('<div>').appendTo('body')
+		.attr("id", "word_tooltip")
+		.attr("class", "tooltip")
+		.css("visibility", "visible");
+
+
+*/
+div.tooltip {
+	position: absolute;
+	max-width: 300px;
+	padding: 4px;
+  
+  	word-wrap: normal;
+	text-align: left;
+  
+	opacity: 0.9;
+	background: rgb(205, 176, 222);
+	border-radius: 8px;
+	pointer-events: none;
+
+	visibility: hidden;
+}
+div.tooltip th {
+	font-size: 1.5em;
+	border-bottom: 1px solid #777;
+	color: purple;
+}
+div.tooltip td {
+	font-size: 0.8em;
+
+	color: black;
+}
+
+
+a.ref {
+	vertical-align: super;
+	font-size: small;
+}
+
+/***************************
+****************************
+			MISC
+****************************
+***************************/  
+  .dot {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+
+	background-color: #4d2626;
+
+	margin: 15px;
+  }
+
+  .dot:hover {
+	background-color: red;
+  }
+
+
+/*  Keyboard buttons */
+/* from https://helplogger.blogspot.com/2013/10/css-keyboard-keys-on-blogger.html */
+kbd {
+	margin:0 7px;
+	padding:1px 5px;
+
+	line-height: 2em;
+	font-size:1.2em;
+	border:1px solid gray;
+	border-radius:3px;
+	box-shadow:1px 0 1px 0 #eee, 0 2px 0 2px #ccc, 0 2px 0 3px #444;
+}
+kbd+kbd{
+	margin:0 3px;
+	background-color: red;
+	/*
+	 background-color: red;
+	*/
+}
+
+
+
+/*DL, DT, DD TAGS LIST DATA*/
+dl.sameline dt {
+	margin-right: 5px;
+	padding: 5px;
+	float: left;
+
+	font-weight: bold;
+}
+dl.sameline dd {
+	margin: 2px 0;
+	padding: 5px;
+}
+
+
+
+/***************************
+****************************
+		Tree
+****************************
+***************************/  
+
+/*
+ Tree structure using CSS:
+ http://stackoverflow.com/questions/14922247/how-to-get-a-tree-in-html-using-pure-css
+ http://dabblet.com/gist/6878696
+*/
+/* properties of font: style | variant | font size/line-height | family */
+.tree {
+	
+	font: normal normal 28px/40px Helvetica, Arial, sans-serif;  
+	list-style-type: none; 
+} 
+.tree ul{
+	
+	margin-left: 0 0 0 1em;
+	padding: 0;
+	position: relative;   
+	overflow:hidden;    
+  }
+  
+  .tree li{
+	margin: 0;
+	padding: 0 1.2em;  
+	position: relative;   
+  }
+	
+  .tree li::before, .tree li::after{
+	content: '';
+	position: absolute;
+	left: 0;
+  }
+  
+  /* horizontal line on inner list items */
+  .tree li::before{
+	border-top: 1px solid #999;
+	top: 1em;
+	width: 1em;
+	height: 0;    
+  }
+  
+  /* vertical line on list items */   
+  .tree li:after{
+	border-left: 1px solid #999;
+	height: 100%;
+	width: 0px;
+	top: -1em; 
+  }
+  
+  /* lower line on list items from the first level because they don't have parents */
+  .tree > li::after{
+	top: 1em;
+  }
+  
+  /* hide line from the last of the first level list items */
+  .tree > li:last-child::after{
+	display: none;
+  }
+    
+  .tree ul:last-child li:last-child:after{
+  	height:2em;
+  }
+
+
+
+/***************************
+****************************
+			AJENOS
+****************************
+***************************/  
+
+
+/* https://stackoverflow.com/questions/7415872/change-color-of-png-image-via-css */
+/*Filter styles*/
+.saturate { filter: saturate(3); }
+.grayscale { filter: grayscale(100%); }
+.contrast { filter: contrast(160%); }
+.brightness { filter: brightness(0.25); }
+.blur { filter: blur(3px); }
+.invert { filter: invert(100%); }
+.sepia { filter: sepia(100%); }
+.huerotate { filter: hue-rotate(180deg); }
+.opacity { filter: opacity(50%); }
+
+
+
+
+
